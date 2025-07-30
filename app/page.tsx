@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 
 function Home() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const [ status, setStatus ] = useState('')
 
   const checkDomain = async (subdomain: string, platform: string) => {
@@ -28,13 +27,13 @@ function Home() {
 
 
   return (
-    <>
-      <div
+    <main>
+      <button
        onClick={() => checkDomain('expensify-t', 'vercel.app')} 
       >Click
-      </div>
+      </button>
       <h1>{status}</h1>
-    </>
+    </main>
   );
 }
 
