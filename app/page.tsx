@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import Navbar from '../components/reusable/navbar';
+import { useState } from 'react';
 
 function Home() {
   const [ status, setStatus ] = useState('')
@@ -29,7 +30,7 @@ function Home() {
   return (
     <main>
       <button
-       onClick={() => checkDomain('expensify-t', 'vercel.app')} 
+       onClick={() => checkDomain('expensify-t', 'vercel.app')}
       >Click
       </button>
       <h1>{status}</h1>
