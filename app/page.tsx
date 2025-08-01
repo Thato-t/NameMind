@@ -1,15 +1,16 @@
 'use client';
 
 import Navbar from './components/reusable/navbar';
-import { useState } from 'react';
+import LandingMain from './components/landingMain'
 
 function Home() {
 
   return (
-    <main>
+    <>
       <Navbar />
-    </main>
-  );
+      <LandingMain />
+    </>
+  )
 }
 
 export default Home
