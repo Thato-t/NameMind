@@ -12,6 +12,7 @@ function LandingResult() {
     const [ available , setAvailable] = useState<boolean>(false);
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
+    const domainEntered: string = (localStorage.getItem('domainEntered') ?? '""') || '';
 
     const checkingDomain = () => {
         if (domain.trim() === '') {
@@ -47,6 +48,7 @@ function LandingResult() {
                 className="flex-1 bg-[#14213D] text-white px-4 py-2 rounded-l-lg focus:outline-none placeholder-gray-400"
                 placeholder="namemind"
                 onChange={(event) => setDomain(event.target.value)}
+                value={domain || domainEntered}
             />
             <span className="bg-[#14213D] text-gray-400 px-4 py-2 rounded-r-lg text-sm font-medium">
                 <select

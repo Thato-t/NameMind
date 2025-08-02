@@ -2,11 +2,11 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import useDomainCheck from '../../../hooks/domainCheck'
-// import { useRouter } from 'next/router';
+import useDomainCheck from '../../../hooks/domainCheck';
+import { useRouter }from 'next/navigation';
 
 function Navbar(){
-    // const router = useRouter();
+    const router = useRouter();
     const [ domain, setDomain ] = useState<string>('');
     const { checkDomain } = useDomainCheck();
 
@@ -14,6 +14,13 @@ function Navbar(){
     const routeToSign = () => {
         console.log('Lets sign in');
         // router.push('/sign');
+    }
+    const checkingDomain = () => {
+        if (domain.trim() === '') return;
+        // TODO call the checkDomain function  when you hav found a way to make the request directly from here and find the results in the landing-result page
+        // checkDomain(domain);
+        localStorage.setItem('domainEntered', domain || '');
+        router.push('/landing-result');
     }
 
 
@@ -57,7 +64,7 @@ function Navbar(){
                         Generate
                     </button>
                     <button
-                        onClick={() => checkDomain(domain)}
+                        onClick={() => checkingDomain()}
                         className="flex items-center px-4 py-2 rounded bg-white text-gray-400 hover:bg-gray-200 transition cursor-pointer"
                     >
                         Check

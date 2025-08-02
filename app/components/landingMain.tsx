@@ -20,7 +20,7 @@ function LandingMain() {
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mb-12">
         {/* Feature Card */}
-        <div className="bg-[#14213D] rounded-lg p-5 flex flex-col items-start shadow-md">
+        <div className="bg-[#14213D] rounded-lg p-5 flex flex-col items-start shadow-md cursor-pointer">
           <div className="flex items-center mb-2">
             <Image src="/icons/gray/bolt.png" alt="bolt" width={28} height={28} />
             <p className="ml-2 text-lg font-semibold text-[#19B6F9]">AI-Powered Search</p>
@@ -38,7 +38,7 @@ function LandingMain() {
             Check domain availability instantly across all major TLDs and hosting platforms
           </p>
         </div>
-        <div className="bg-[#14213D] rounded-lg p-5 flex flex-col items-start shadow-md">
+        <div className="bg-[#14213D] rounded-lg p-5 flex flex-col items-start shadow-md cursor-pointer">
           <div className="flex items-center mb-2">
             <Image src="/icons/gray/circle-outer-dashed-circle.png" alt="dashed-circle" width={28} height={28} />
             <p className="ml-2 text-lg font-semibold text-[#FF7F11]">Smart Suggestions</p>
