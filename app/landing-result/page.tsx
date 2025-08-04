@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Available from  '../components/reusable/available';
 import useDomainCheck from '../../hooks/domainCheck';
+import PopupResult from '../components/modal/PopupResult'
 
 
 function LandingResult() {
@@ -88,6 +89,7 @@ function LandingResult() {
                 Free to Use
             </div>
         </div>
+        <PopupResult available={available} />
     </main>
   )
 }
