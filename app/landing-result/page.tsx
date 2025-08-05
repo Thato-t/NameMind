@@ -7,20 +7,21 @@ import PopupResult from '../components/modal/PopupResult'
 
 
 function LandingResult() {
-    const platformsArr: string[] = ['vercel.app', 'netlify.app', 'co.za', 'com', 'io'];
-    const [ domain, setDomain ] = useState<string>('');
-    const [ platform, setPlatform ] = useState<string>('');
+    const platformsArr: string[] = ['.vercel.app', '.netlify.app', '.co.za', '.com', '.io'];
+    const domainEntered: string = (window.localStorage.getItem('domainEntered') ?? '""') || '';
+    const [ domain, setDomain ] = useState<string>(domainEntered);
+    const [ platform, setPlatform ] = useState<string>('.vercel.app');
     const [ available , setAvailable] = useState<boolean>(false);
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
-    const domainEntered: string = (localStorage.getItem('domainEntered') ?? '""') || '';
 
     const checkingDomain = () => {
         if (domain.trim() === '') {
             setErrMsg('Please enter a subdomain');
             return;
         }
-        checkDomain(domain);
+        const fullDomain: string = domain + platform;
+        checkDomain(fullDomain);
         status === 'Taken' ? setAvailable(false) : setAvailable(true);
     }
 
@@ -29,9 +30,7 @@ function LandingResult() {
     <main className="min-h-screen bg-[#101624] flex flex-col items-center justify-center px-4">
         {/* Top Icon */}
         <div className="mb-6">
-            <div className="bg-[#19B6F9] rounded-full w-20 h-20 flex items-center justify-center mx-auto shadow-lg">
-            <Image src="/icons/white/search.png" alt="search" width={40} height={40} />
-            </div>
+            <Image src="/images/logo.png" alt="search" width={60} height={60} />
         </div>
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-white text-center mb-2">
@@ -89,7 +88,7 @@ function LandingResult() {
                 Free to Use
             </div>
         </div>
-        <PopupResult available={available} />
+        <PopupResult available={available} domain={domain} />
     </main>
   )
 }

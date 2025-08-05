@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 function useDomainCheck() {
     const [ status, setStatus ] = useState<string>('');
+    const [ isTrue, setIsTrue ] = useState<boolean>(false);
 
     const checkDomain = async (subdomain: string) => {
         try {
@@ -14,13 +15,13 @@ function useDomainCheck() {
             });
             const data = await res.json();
             setStatus(data.status);
-            console.log(status);
+            setIsTrue(false);
         } catch (error) {
             console.log('Error found', error);
         }
     }
 
-  return { status, checkDomain }
+  return { status, checkDomain, isTrue }
 }
 
 export default useDomainCheck
