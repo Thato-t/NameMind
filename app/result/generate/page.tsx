@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/reusable/navbar'
 import Image from 'next/image';
+import useGenerateDomain from '../../../hooks/generateDomain';
 
 function GeneratePage() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState<string>('');
+  const { generateDomains } = useGenerateDomain();
 
   return (
     <>
@@ -18,9 +20,9 @@ function GeneratePage() {
         </p>
         {/* Top Buttons */}
         <div className="flex gap-4 mb-8">
-          <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition">
+          <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer">
             <Image src="/icons/white/bolt.png" alt="bolt" width={20} height={20} className="mr-2" />
-            Generate Domain Ideas
+            Search Domain Names
           </button>
           <button className="flex items-center bg-[#181e2e] text-gray-400 font-semibold px-5 py-2 rounded-lg cursor-not-allowed">
             <Image src="/icons/gray/light-bulb.png" alt="light-bulb" width={20} height={20} className="mr-2" />
@@ -30,7 +32,7 @@ function GeneratePage() {
         {/* Main Content */}
         <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
           {/* Left: Generator Card */}
-          <div className="bg-[#19B6F9] rounded-xl p-8 flex-1 min-w-[340px] shadow-lg">
+          <div className="bg-[#19B6F9] rounded-xl p-8 flex-1 min-w-[340px] max-h-[400px] shadow-lg">
             <div className="flex items-center mb-4">
               <Image src="/icons/light-blue/sparkles-alt.png" alt="sparkles" width={28} height={28} />
               <span className="ml-2">
@@ -47,7 +49,7 @@ function GeneratePage() {
                 <input
                   type="text"
                   value={input}
-                  onChange={e => setInput(e.target.value)}
+                  onChange={(event) => setInput(event.target.value)}
                   className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                   placeholder="e.g. Include app keyword or website for healthcare..."
                 />
@@ -56,16 +58,14 @@ function GeneratePage() {
                 </button>
               </div>
             </div>
-            <div className="flex gap-4 mb-4">
+            {/* TODO add this options inside the advanced button <div className="flex gap-4 mb-4">
               <div>
                 <span className="text-white text-sm">Generation Style</span>
-                {/* TODO: Add dropdown or options */}
               </div>
               <div>
                 <span className="text-white text-sm">Industry Focus</span>
-                {/* TODO: Add dropdown or options */}
               </div>
-            </div>
+            </div> */}
             <div className="mb-4">
               <p className="text-white text-sm mb-2">Preferred Extensions</p>
               <div className="flex gap-2 flex-wrap">
@@ -75,11 +75,11 @@ function GeneratePage() {
               </div>
             </div>
             <div className="flex items-center justify-between mt-6">
-              <button className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition">
+              <button className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => generateDomains(input)}>
                 <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />
-                Generate 50 Domain Ideas
+                Generate Domain Ideas
               </button>
-              <button className="flex items-center bg-white text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition">
+              <button className="flex items-center bg-white text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer">
                 <Image src="/icons/gray/cog.png" alt="cog" width={20} height={20} className="mr-2" />
                 Advanced
               </button>
@@ -94,7 +94,7 @@ function GeneratePage() {
                 <span className="ml-2 text-white font-semibold text-lg">Instant Generation</span>
               </div>
               <p className="text-white text-sm mb-4">Get domain suggestions in seconds</p>
-              <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#009689] transition">
+              <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer">
                 <Image src="/icons/white/rocket.png" alt="rocket" width={20} height={20} className="mr-2" />
                 Quick Start
               </button>
@@ -151,46 +151,32 @@ function GeneratePage() {
             <Image src="/images/logo.png" alt="logo" width={28} height={28} className="mb-2" />
             <p className="text-white font-semibold mb-1">Smart AI</p>
             <p className="text-gray-400 text-xs mb-2 text-center">Intelligent suggestions</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm">Generate</button>
+            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-pointer">Generate</button>
           </div>
           <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
             <Image src="/icons/gray/circle-outer-dashed-circle.png" alt="bulk" width={28} height={28} className="mb-2" />
             <p className="text-white font-semibold mb-1">Bulk Generate</p>
             <p className="text-gray-400 text-xs mb-2 text-center">Multiple keywords</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm">Upload List</button>
+            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-not-allowed">Upload List</button>
           </div>
           <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
             <Image src="/icons/gray/shuffle.png" alt="mixer" width={28} height={28} className="mb-2" />
             <p className="text-white font-semibold mb-1">Name Mixer</p>
             <p className="text-gray-400 text-xs mb-2 text-center">Combine words</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm">Mix Names</button>
+            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-not-allowed">Mix Names</button>
           </div>
           <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
             <Image src="/icons/gray/check-circle.png" alt="availability" width={28} height={28} className="mb-2" />
             <p className="text-white font-semibold mb-1">Availability</p>
             <p className="text-gray-400 text-xs mb-2 text-center">Real-time check</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm">Check</button>
+            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-pointer">Check</button>
           </div>
-          {/* <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
-            <Image src="" alt="other" width={28} height={28} className="mb-2" />
+          <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
+            <Image src="/icons/gray/star.png" alt="star" width={28} height={28} className="mb-2" />
             <p className="text-white font-semibold mb-1">Other Tools</p>
             <p className="text-gray-400 text-xs mb-2 text-center">More features</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm">Explore</button>
-          </div> */}
-        </div>
-        {/* Bottom CTA */}
-        <div className="w-full max-w-4xl bg-[#19B6F9] rounded-xl p-8 flex flex-col md:flex-row items-center justify-between shadow-lg mb-8">
-          <div className="flex items-center mb-4 md:mb-0">
-            <Image src="/icons/white/sparkles-alt.png" alt="bolt" width={32} height={32} className="mr-3" />
-            <span className="text-white font-bold text-xl">Ready to Generate?</span>
+            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-not-allowed">Explore</button>
           </div>
-          <p className="text-white text-center md:text-left mb-4 md:mb-0">
-            Create thousands of domain ideas with our advanced AI technology
-          </p>
-          <button className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition">
-            <Image src="/icons/white/rocket.png" alt="rocket" width={20} height={20} className="mr-2" />
-            Start Now
-          </button>
         </div>
       </main>
     </>
