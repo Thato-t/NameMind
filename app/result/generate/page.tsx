@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import Navbar from '../../components/reusable/navbar'
 import Image from 'next/image';
@@ -6,6 +8,7 @@ import useGenerateDomain from '../../../hooks/generateDomain';
 function GeneratePage() {
   const [input, setInput] = useState<string>('');
   const { generateDomains } = useGenerateDomain();
+
 
   return (
     <>

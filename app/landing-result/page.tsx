@@ -3,17 +3,21 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Available from  '../components/reusable/available';
 import useDomainCheck from '../../hooks/domainCheck';
-import PopupResult from '../components/modal/PopupResult'
+import PopupResult from '../components/modal/PopupResult';
+import { useRouter } from 'next/navigation';
 
 
 function LandingResult() {
     const platformsArr: string[] = ['.vercel.app', '.netlify.app', '.co.za', '.com', '.io'];
     const domainEntered: string = (window.localStorage.getItem('domainEntered') ?? '""') || '';
+    const router = useRouter();
+
     const [ domain, setDomain ] = useState<string>(domainEntered);
     const [ platform, setPlatform ] = useState<string>('.vercel.app');
     const [ available , setAvailable] = useState<boolean>(false);
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
+
 
     const checkingDomain = () => {
         if (domain.trim() === '') {
@@ -30,7 +34,14 @@ function LandingResult() {
     <main className="min-h-screen bg-[#101624] flex flex-col items-center justify-center px-4">
         {/* Top Icon */}
         <div className="mb-6">
-            <Image src="/images/logo.png" alt="search" width={60} height={60} />
+            <Image 
+             src="/images/logo.png" 
+             alt="search" 
+             width={60} 
+             height={60}
+             onClick={() => router.push('/')}
+             className="cursor-pointer" 
+            />
         </div>
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-white text-center mb-2">

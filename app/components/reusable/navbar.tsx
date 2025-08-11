@@ -1,19 +1,24 @@
 'use client'
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useDomainCheck from '../../../hooks/domainCheck';
-import { useRouter }from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 function Navbar(){
     const router = useRouter();
+    const pathname = usePathname();
     const [ domain, setDomain ] = useState<string>('');
+    const [ generatePage, setGeneratePage ] = useState<boolean>(false);
     const { checkDomain } = useDomainCheck();
 
+    useEffect(() => {
+        pathname === '/result/generate' ? setGeneratePage(true) : setGeneratePage(false)
+    }, [pathname])
 
     const routeToSign = () => {
-        console.log('Lets sign in');
-        // router.push('/sign');
+        // TODO add feature that before going to the generate page I sign up first
+        router.push('/result/generate');
     }
     const checkingDomain = () => {
         if (domain.trim() === '') return;
@@ -22,6 +27,8 @@ function Navbar(){
         localStorage.setItem('domainEntered', domain || '');
         router.push('/landing-result');
     }
+
+
 
 
     return(
@@ -35,6 +42,7 @@ function Navbar(){
                         width={60}
                         height={60}
                         className="cursor-pointer"
+                        onClick={() => router.push('/')}
                     />
                 </div>
                 {/* Search */}
@@ -49,7 +57,7 @@ function Navbar(){
                         />
                         <input 
                             type="text" 
-                            placeholder="Search domain and include platform" 
+                            placeholder="Search domain" 
                             onChange={(event) => setDomain(event.target.value)}
                             className="w-full pl-10 pr-3 py-2 rounded-md bg-[#151F32] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                         />
@@ -60,6 +68,7 @@ function Navbar(){
                     <button 
                         onClick={() => routeToSign()}
                         className="px-4 py-2 rounded bg-[#009689] cursor-pointer text-white hover:bg-[#19B6F9] transition"
+                        style={{cursor: generatePage ? 'not-allowed' : 'pointer'}}
                     >
                         Generate
                     </button>

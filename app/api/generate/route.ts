@@ -7,7 +7,7 @@ const client = new OpenAI({
 
 export async function POST(req: Request){
     const { description } = await req.json();
-    console.log(description)
+
     if (!description){
         return NextResponse.json({error: 'input required'}, {status: 400})
     }
