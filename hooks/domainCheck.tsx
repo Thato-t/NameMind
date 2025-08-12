@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 
 function useDomainCheck() {
     const [ status, setStatus ] = useState<string>('');
-    const [ isTrue, setIsTrue ] = useState<boolean>(false);
+    const [ isTrue, setIsTrue ] = useState<boolean>(true);
 
     const checkDomain = async (subdomain: string) => {
+        setIsTrue(true);
         try {
             const res = await fetch(`/api/check-subdomain/landing-page`, {
                 method: 'POST',

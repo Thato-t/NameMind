@@ -11,11 +11,10 @@ interface AvailableProps{
 // TODO check why is not working when it should display
 function PopupResult({ available, domain }: AvailableProps) {
     const { isTrue } = useDomainCheck();
-    console.log(isTrue)
     return(
         <>
-            <div className=" max-w-md bg-[#181e2e] rounded-xl p-6 flex flex-col shadow-lg mt-14" style={{display: !isTrue ? 'none' : 'block'}}>
-                <Available />
+            <div className=" max-w-md bg-[#181e2e] rounded-xl p-6 flex flex-col shadow-lg mt-14" style={{display: isTrue ? 'none' : 'flex'}}>
+                <Available available={available} />
                 <p className="text-white mt-2">{`https://${domain} ${available ? 'is available to use' : 'is not available to use'}`}</p>
             </div>
         </>

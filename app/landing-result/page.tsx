@@ -14,14 +14,13 @@ function LandingResult() {
 
     const [ domain, setDomain ] = useState<string>(domainEntered);
     const [ platform, setPlatform ] = useState<string>('.vercel.app');
-    const [ available , setAvailable] = useState<boolean>(false);
+    const [ available , setAvailable] = useState<boolean>();
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
 
-
     const checkingDomain = () => {
         if (domain.trim() === '') {
-            setErrMsg('Please enter a subdomain');
+            setErrMsg('Please enter a domain');
             return;
         }
         const fullDomain: string = domain + platform;
@@ -56,10 +55,10 @@ function LandingResult() {
             <div className="flex items-center w-full mb-4">
             <input
                 type="text"
+                value={domain || domainEntered}
                 className="flex-1 bg-[#14213D] text-white px-4 py-2 rounded-l-lg focus:outline-none placeholder-gray-400"
                 placeholder="namemind"
                 onChange={(event) => setDomain(event.target.value)}
-                value={domain || domainEntered}
             />
             <span className="bg-[#14213D] text-gray-400 px-4 py-2 rounded-r-lg text-sm font-medium">
                 <select
@@ -73,7 +72,8 @@ function LandingResult() {
             </div>
             {/* Status Row */}
             <div className="flex items-center w-full mb-4">
-            {status === '' ? '' : domain.trim() === '' ? 
+            {status === '' ? '' : 
+                domain.trim() === '' ?
                 <span className="text-red-500 text-sm">{errMsg}</span> : 
                 <Available available={available} />
             }

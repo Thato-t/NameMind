@@ -6,9 +6,10 @@ import Image from 'next/image';
 import useGenerateDomain from '../../../hooks/generateDomain';
 
 function GeneratePage() {
-  const [input, setInput] = useState<string>('');
   const { generateDomains } = useGenerateDomain();
 
+  const [input, setInput] = useState<string>('');
+  const [clicked, setClicked] = useState<boolean>(false);
 
   return (
     <>
@@ -72,8 +73,16 @@ function GeneratePage() {
             <div className="mb-4">
               <p className="text-white text-sm mb-2">Preferred Extensions</p>
               <div className="flex gap-2 flex-wrap">
-                {['.com', '.io', '.tech', '.app', '.dev'].map(ext => (
-                  <div key={ext} className="bg-[#181e2e] text-white px-3 py-1 rounded-lg text-xs cursor-pointer hover:bg-[#009689] transition">{ext}</div>
+                {['.com', '.io', '.tech', '.app', '.dev'].map((ext, index) => (
+                  <div 
+                   key={index} 
+                   className={`
+                    bg-[#181e2e] text-white px-3 py-1 rounded-lg text-xs cursor-pointer hover:bg-[#009689] transition
+                    ${clicked ? "bg-[#009689]" : "bg-[#181e2e]"}`}
+                    onClick={() => setClicked(true)}
+                  >
+                    {ext}
+                  </div>
                 ))}
               </div>
             </div>

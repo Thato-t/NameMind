@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NameMind",
   description: "Validate ideas and find names",
+  icons: {
+    icon: '/images/logo.png'
+  }
 };
 
 export default function RootLayout({
