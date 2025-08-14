@@ -10,6 +10,10 @@ function GeneratePage() {
 
   const [input, setInput] = useState<string>('');
   const [clicked, setClicked] = useState<boolean>(false);
+  const [extensions, setExtensions] = useState<string[]>(['.com', '.io', '.tech', '.vercel.app', '.dev']);
+  const [activeIndex, setActiveIndex] = useState();
+
+
 
   return (
     <>
@@ -73,13 +77,13 @@ function GeneratePage() {
             <div className="mb-4">
               <p className="text-white text-sm mb-2">Preferred Extensions</p>
               <div className="flex gap-2 flex-wrap">
-                {['.com', '.io', '.tech', '.app', '.dev'].map((ext, index) => (
+                {extensions.map((ext, index) => (
                   <div 
-                   key={index} 
+                   key={index}
+                   onClick={() => setActiveIndex([...index])}
                    className={`
                     bg-[#181e2e] text-white px-3 py-1 rounded-lg text-xs cursor-pointer hover:bg-[#009689] transition
-                    ${clicked ? "bg-[#009689]" : "bg-[#181e2e]"}`}
-                    onClick={() => setClicked(true)}
+                    ${activeIndex === index  ? "bg-[#009689]" : "bg-[#181e2e]"}`}
                   >
                     {ext}
                   </div>
