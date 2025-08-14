@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 import Navbar from '../../components/reusable/navbar'
 import Image from 'next/image';
 import useGenerateDomain from '../../../hooks/generateDomain';
+import PopupAdvanced from '../../components/modal/PopupAdvanced';
 
 function GeneratePage() {
   const { generateDomains } = useGenerateDomain();
-
-  const [input, setInput] = useState<string>('');
-  const [clicked, setClicked] = useState<boolean>(false);
-  const [extensions, setExtensions] = useState<string[]>(['.com', '.io', '.tech', '.vercel.app', '.dev']);
-  const [activeIndex, setActiveIndex] = useState();
+  const [ input, setInput ] = useState<string>('');
+  const [ clicked, setClicked ] = useState<boolean>(false);
+  const [ extensions, setExtensions ] = useState<string[]>(['.com', '.io', '.tech', '.vercel.app', '.dev']);
+  const [ activeIndex, setActiveIndex ] = useState();
+  const [ show, setShow ] = useState<boolean>();
 
 
 
@@ -90,12 +91,16 @@ function GeneratePage() {
                 ))}
               </div>
             </div>
+            {show ? <PopupAdvanced /> : ''}
             <div className="flex items-center justify-between mt-6">
               <button className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => generateDomains(input)}>
                 <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />
                 Generate Domain Ideas
               </button>
-              <button className="flex items-center bg-white text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer">
+              <button 
+               className="flex items-center bg-white text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer"
+               onClick={() => show ? setShow(false) : setShow(true)}
+              >
                 <Image src="/icons/gray/cog.png" alt="cog" width={20} height={20} className="mr-2" />
                 Advanced
               </button>
