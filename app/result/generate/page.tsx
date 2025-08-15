@@ -11,7 +11,7 @@ function GeneratePage() {
   const [ input, setInput ] = useState<string>('');
   const [ clicked, setClicked ] = useState<boolean>(false);
   const [ extensions, setExtensions ] = useState<string[]>(['.com', '.io', '.tech', '.vercel.app', '.dev']);
-  const [ activeIndex, setActiveIndex ] = useState();
+  const [ activeIndex, setActiveIndex ] = useState<number>();
   const [ show, setShow ] = useState<boolean>();
 
 
@@ -78,7 +78,7 @@ function GeneratePage() {
             <div className="mb-4">
               <p className="text-white text-sm mb-2">Preferred Extensions</p>
               <div className="flex gap-2 flex-wrap">
-                {extensions.map((ext, index) => (
+                {extensions.map((ext: string, index: number) => (
                   <div 
                    key={index}
                    onClick={() => setActiveIndex([...index])}
