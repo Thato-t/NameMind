@@ -3,7 +3,6 @@
 import Navbar from './components/reusable/navbar';
 import LandingMain from './components/landingMain';
 
-
 function Home() {
 
   return (

@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/reusable/navbar'
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import useGenerateDomain from '../../../hooks/generateDomain';
 import PopupAdvanced from '../../components/modal/PopupAdvanced';
 
 function GeneratePage() {
+  const router = useRouter();
   const { generateDomains } = useGenerateDomain();
   const [ input, setInput ] = useState<string>('');
   const [ clicked, setClicked ] = useState<boolean>(false);
@@ -115,7 +117,10 @@ function GeneratePage() {
                 <span className="ml-2 text-white font-semibold text-lg">Instant Generation</span>
               </div>
               <p className="text-white text-sm mb-4">Get domain suggestions in seconds</p>
-              <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer">
+              <button 
+               className="flex items-center bg-[#19B6F9] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer"
+               onClick={() => router.push('/sign')}
+              >
                 <Image src="/icons/white/rocket.png" alt="rocket" width={20} height={20} className="mr-2" />
                 Quick Start
               </button>
