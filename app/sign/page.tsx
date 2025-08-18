@@ -21,38 +21,38 @@ function SignPage() {
                 </div>
                 <p className="text-gray-400 mb-6 text-sm">Access your domain management dashboard</p>
                 <form className="space-y-4">
-                <div>
-                    <input
-                    type="email"
-                    className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                    placeholder="Enter your email"
-                    />
-                </div>
-                <div>
-                    <input
-                    type="password"
-                    className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                    placeholder="Enter your password"
-                    />
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                    <label className="text-gray-400 flex items-center">
-                    <input type="checkbox" className="mr-2 accent-[#19B6F9]" />
-                    Remember me
-                    </label>
-                    <a href="#" className="text-[#19B6F9] hover:underline">Forgot password?</a>
-                </div>
-                <button className="w-full bg-[#19B6F9] text-white font-semibold py-2 rounded-lg hover:bg-[#009689] transition">
-                    Sign In
-                </button>
+                    <div>
+                        <input
+                        type="email"
+                        className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
+                        placeholder="Enter your email"
+                        />
+                    </div>
+                    <div>
+                        <input
+                        type="password"
+                        className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
+                        placeholder="Enter your password"
+                        />
+                    </div>
+                    <div className="flex justify-between items-center text-xs">
+                        <label className="text-gray-400 flex items-center">
+                        <input type="checkbox" className="mr-2 accent-[#19B6F9]" />
+                        Remember me
+                        </label>
+                        <a href="#" className="text-[#19B6F9] hover:underline">Forgot password?</a>
+                    </div>
+                    <button className="w-full bg-[#19B6F9] text-white font-semibold py-2 rounded-lg hover:bg-[#009689] transition">
+                        Sign In
+                    </button>
                 </form>
                 <div className="flex gap-4 mt-4">
                 <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition">
-                    <Image src="" alt="github" width={20} height={20} />
+                    <Image src="/icons/gray/github.png" alt="github" width={20} height={20} />
                     GitHub
                 </button>
                 <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition">
-                    <Image src="" alt="google" width={20} height={20} />
+                    <Image src="/icons/gray/globe-alt.png" alt="globe" width={20} height={20} />
                     Google
                 </button>
                 </div>
@@ -60,67 +60,67 @@ function SignPage() {
             {/* Create Account */}
             <div className="bg-[#181e2e] rounded-xl shadow-lg p-8 flex-1 min-w-[300px]">
                 <div className="flex items-center mb-4">
-                <Image src="" alt="user-plus" width={28} height={28} />
+                <Image src="/icons/purple/user.png" alt="user-plus" width={28} height={28} />
                 <span className="ml-2 text-lg font-semibold text-white">Create Account</span>
                 </div>
                 <p className="text-gray-400 mb-6 text-sm">Join thousands of domain enthusiasts</p>
                 <form className="space-y-4">
-                <div className="flex gap-2">
-                    <input
-                    type="text"
-                    className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                    placeholder="First Name"
-                    defaultValue="John"
-                    />
-                    <input
-                    type="text"
-                    className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                    placeholder="Last Name"
-                    defaultValue="Doe"
-                    />
-                </div>
-                <div>
-                    <input
-                    type="email"
-                    className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                    placeholder="Email Address"
-                    defaultValue="john@namemind.com"
-                    />
-                </div>
-                <div>
-                    <input
-                    type="password"
-                    className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                    placeholder="Create a strong password"
-                    />
-                </div>
-                <div>
-                    <input
-                    type="password"
-                    className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                    placeholder="Confirm your password"
-                    />
-                </div>
-                <button className="w-full bg-[#BF08B8] text-white font-semibold py-2 rounded-lg hover:bg-[#19B6F9] transition">
-                    Create Account
-                </button>
+                    <div className="flex gap-2">
+                        <input
+                        type="text"
+                        className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
+                        placeholder="First Name"
+                        defaultValue="John"
+                        />
+                        <input
+                        type="text"
+                        className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
+                        placeholder="Last Name"
+                        defaultValue="Doe"
+                        />
+                    </div>
+                    <div>
+                        <input
+                        type="email"
+                        className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
+                        placeholder="Email Address"
+                        defaultValue="john@namemind.com"
+                        />
+                    </div>
+                    <div>
+                        <input
+                        type="password"
+                        className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
+                        placeholder="Create a strong password"
+                        />
+                    </div>
+                    <div>
+                        <input
+                        type="password"
+                        className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
+                        placeholder="Confirm your password"
+                        />
+                    </div>
+                    <button className="w-full bg-[#BF08B8] text-white font-semibold py-2 rounded-lg hover:bg-[#19B6F9] transition">
+                        Create Account
+                    </button>
                 </form>
             </div>
             </div>
             {/* Features */}
             <div className="w-full max-w-3xl bg-[#19B6F9] rounded-xl p-8 flex flex-col md:flex-row items-center justify-between shadow-lg mb-8">
             <div className="flex flex-col items-center flex-1 mb-6 md:mb-0">
-                <Image src="" alt="bolt" width={32} height={32} className="mb-2" />
+                <Image src="/icons/" alt="bolt" width={32} height={32} className="mb-2" />
                 <p className="text-white font-bold mb-1">AI-Powered Suggestions</p>
                 <p className="text-white text-xs text-center">Get intelligent domain name suggestions tailored to your business</p>
             </div>
             <div className="flex flex-col items-center flex-1 mb-6 md:mb-0">
-                <Image src="" alt="globe" width={32} height={32} className="mb-2" />
+                <Image src="/icons/light-blue/globe-alt.png" alt="globe" width={32} height={32} className="mb-2" />
                 <p className="text-white font-bold mb-1">Global Domain Search</p>
                 <p className="text-white text-xs text-center">Search across hundreds of TLDs and find the perfect match</p>
             </div>
             <div className="flex flex-col items-center flex-1">
-                <Image src="" alt="shield" width={32} height={32} className="mb-2" />
+                <Image src="/icons/purple/shield.png" alt="shield" width={32} height={32} className="mb-2" />
                 <p className="text-white font-bold mb-1">Secure & Reliable</p>
                 <p className="text-white text-xs text-center">Enterprise grade security with real-time domain monitoring</p>
             </div>

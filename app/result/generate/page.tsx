@@ -32,7 +32,7 @@ function GeneratePage() {
         {/* Top Buttons */}
         <div className="flex gap-4 mb-8">
           <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer">
-            <Image src="/icons/white/bolt.png" alt="bolt" width={20} height={20} className="mr-2" />
+            <Image src="/icons/white/search.png" alt="bolt" width={20} height={20} className="mr-2" />
             Search Domain Names
           </button>
           <button className="flex items-center bg-[#181e2e] text-gray-400 font-semibold px-5 py-2 rounded-lg cursor-not-allowed">
