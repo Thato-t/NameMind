@@ -1,27 +1,30 @@
 'use client';
 interface showProp{
-  showModal: boolean
+  showModal: boolean | null,
+  selectedExtensions: string[]
 }
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import useDomainExtensions from '../../../hooks/domainExtensions';
 import Image from 'next/image';
 
-function PopupAdvanced({showModal}: showProp) {
+function PopupAdvanced({showModal, selectedExtensions}: showProp) {
   const { extensions } = useDomainExtensions();
-  const [activeExtensions, setActiveExtensions] = useState<string[]>([]);
+  const [ activeExtensions, setActiveExtensions ] = useState<string[]>([]);
+
 
   // Add extension handler
   const handleAddExtension = (ext: string) => {
     if (!activeExtensions.includes(ext)) {
       setActiveExtensions([...activeExtensions, ext]);
-      localStorage.setItem('extensions', JSON.stringify(activeExtensions));
+      selectedExtensions([...activeExtensions, ext]);
     }
   };
-
+  
   // Remove extension handler
   const handleRemoveExtension = (ext: string) => {
     setActiveExtensions(activeExtensions.filter(e => e !== ext));
+    selectedExtensions(activeExtensions);
   };
 
   return (
@@ -36,7 +39,7 @@ function PopupAdvanced({showModal}: showProp) {
             >
               {actExt}
               <button
-                className="ml-2 hover:bg-[#BF08B8] rounded-full p-1 transition"
+                className="ml-2 hover:bg-[#BF08B8] rounded-full p-1 transition cursor-pointer"
                 onClick={() => handleRemoveExtension(actExt)}
               >
                 <Image src="/icons/maroon/x.png" alt="Remove" width={16} height={16} />
@@ -47,7 +50,7 @@ function PopupAdvanced({showModal}: showProp) {
         <div className="mb-4">
           <label className="block text-white font-semibold mb-2">Add Extension</label>
           <select
-            className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none"
+            className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none cursor-pointer"
             onChange={e => handleAddExtension(e.target.value)}
             value=""
           >
@@ -55,7 +58,7 @@ function PopupAdvanced({showModal}: showProp) {
             {extensions
               .filter(ext => !activeExtensions.includes(ext))
               .map((ext: string) => (
-                <option key={ext} value={ext}>
+                <option className="cursor-pointer" key={ext} value={ext}>
                   {ext}
                 </option>
               ))}

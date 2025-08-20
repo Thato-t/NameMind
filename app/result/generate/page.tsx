@@ -12,15 +12,11 @@ function GeneratePage() {
   const { generateDomains } = useGenerateDomain();
   const [ input, setInput ] = useState<string>('');
   const [ clicked, setClicked ] = useState<boolean>(false);
-  const [ extensions, setExtensions ] = useState<string[]>(
-    JSON.parse(localStorage.getItem('extensions')) || ['.com', '.io', '.tech']
-  );
+  const [ extensions, setExtensions ] = useState<string[]>([]);
   const [ activeIndex, setActiveIndex ] = useState<number>();
-  const [ show, setShow ] = useState<boolean>();
+  const [ show, setShow ] = useState<boolean | null>(null);
 
-  const showModal = (bool: boolean) => {
-    setShow(bool);
-  }
+  const showModal = (bool: boolean) => setShow(bool);
 
 
 
@@ -99,7 +95,7 @@ function GeneratePage() {
                 ))}
               </div>
             </div>
-            {show ? <PopupAdvanced showModal={showModal}/> : ''}
+            {show ? <PopupAdvanced showModal={showModal} selectedExtensions={setExtensions} /> : ''}
             <div className="flex items-center justify-between mt-6">
               <button className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => generateDomains(input)}>
                 <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />
@@ -131,36 +127,16 @@ function GeneratePage() {
                 Quick Start
               </button>
             </div>
-            {/* Popular Domains */}
-            <div className="bg-[#181e2e] rounded-xl p-6 shadow-lg mb-2">
-              <div className="flex items-center mb-2">
-                <Image src="/icons/orange/trending-up.png" alt="trending-up" width={20} height={20} />
-                <span className="ml-2 text-white font-semibold text-lg">Popular Domains</span>
-              </div>
-              <div className="flex flex-col gap-2 mt-2">
-                {/* TODO: Map popular domains */}
-                <div className="flex justify-between items-center bg-[#14213D] rounded-lg px-3 py-2">
-                  <span className="text-white text-sm">techflow.ai</span>
-                  <span className="bg-[#19B6F9] text-white text-xs px-2 py-1 rounded">Available</span>
-                </div>
-                <div className="flex justify-between items-center bg-[#14213D] rounded-lg px-3 py-2">
-                  <span className="text-white text-sm">nexusapp.io</span>
-                  <span className="bg-[#19B6F9] text-white text-xs px-2 py-1 rounded">Available</span>
-                </div>
-                <div className="flex justify-between items-center bg-[#14213D] rounded-lg px-3 py-2">
-                  <span className="text-white text-sm">coredev.dev</span>
-                  <span className="bg-[#BF08B8] text-white text-xs px-2 py-1 rounded">Taken</span>
-                </div>
-              </div>
-            </div>
+
+
             {/* Recent Generations */}
-            <div className="bg-[#181e2e] rounded-xl p-6 shadow-lg">
+            {/* <div className="bg-[#181e2e] rounded-xl p-6 shadow-lg">
               <div className="flex items-center mb-2">
                 <Image src="/icons/light-blue/clock-3.png" alt="clock" width={20} height={20} />
                 <span className="ml-2 text-white font-semibold text-lg">Recent Generations</span>
               </div>
               <div className="flex flex-col gap-2 mt-2">
-                {/* TODO: Map recent generations */}
+                {/* TODO: Map recent generations
                 <div className="flex justify-between items-center bg-[#14213D] rounded-lg px-3 py-2">
                   <span className="text-white text-sm">ai freelance startup</span>
                   <Image src="/icons/black/refresh-cw-alt.png" alt="arrow" width={16} height={16} />
@@ -174,7 +150,7 @@ function GeneratePage() {
                   <Image src="/icons/black/refresh-cw-alt.png" alt="arrow" width={16} height={16} />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* Bottom Features */}

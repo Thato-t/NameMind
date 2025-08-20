@@ -1,10 +1,34 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../components/reusable/navbar';
 
 function SignPage() {
+    const [ signEmail, setSignEmail ] = useState<string>('');
+    const [ signPassword, setSignPassword ] = useState<string>('');
+    const [ createName, setCreateName ] = useState<string>('');
+    const [ createSurname, setCreateSurname ] = useState<string>('');
+    const [ createEmail, setCreateEmail ] = useState<string>('');
+    const [ createPassword, setCreatePassword ] = useState<string>('');
+    const [ createConfirmPassword, setCreateConfirmPassword ] = useState<string>('');
+    const [ feedbackMsg, setFeedbackMsg] = useState<string>('');
+
+    const emailRegex = /[a-zA-Z0-9]@gmail\.com/;
+    const testEmailRegex = (email) => emailRegex.test(email);
+
+    const SignHandleSubmit = async (e) => {
+        e.preventDefault();
+        if (!signEmail || !signPassword){
+            setFeedbackMsg('All inputs are required');
+            return;
+        }
+        if (!testEmailRegex(signEmail)){
+            setFeedbackMsg('Your email format must be like this john@namemind.com');
+            return;
+        }
+        setFeedbackMsg('Loading')
+    }
   return (
     <>
         <Navbar />
@@ -20,12 +44,13 @@ function SignPage() {
                 <span className="ml-2 text-lg font-semibold text-white">Sign In</span>
                 </div>
                 <p className="text-gray-400 mb-6 text-sm">Access your domain management dashboard</p>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={SignHandleSubmit}>
                     <div>
                         <input
                         type="email"
                         className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="Enter your email"
+                        onChange={(e) => setSignEmail(e.target.value)}
                         />
                     </div>
                     <div>
@@ -33,29 +58,31 @@ function SignPage() {
                         type="password"
                         className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="Enter your password"
+                        onChange={(e) => setSignPassword(e.target.value)}
                         />
                     </div>
                     <div className="flex justify-between items-center text-xs">
-                        <label className="text-gray-400 flex items-center">
-                        <input type="checkbox" className="mr-2 accent-[#19B6F9]" />
+                        <label className="text-gray-400 flex items-center cursor-pointer" htmlFor="remember">
+                        <input type="checkbox" className="mr-2 accent-[#19B6F9]" id="remember"/>
                         Remember me
                         </label>
                         <a href="#" className="text-[#19B6F9] hover:underline">Forgot password?</a>
                     </div>
-                    <button className="w-full bg-[#19B6F9] text-white font-semibold py-2 rounded-lg hover:bg-[#009689] transition">
+                    <button className="w-full bg-[#19B6F9] text-white font-semibold py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer">
                         Sign In
                     </button>
                 </form>
                 <div className="flex gap-4 mt-4">
-                <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition">
-                    <Image src="/icons/gray/github.png" alt="github" width={20} height={20} />
-                    GitHub
-                </button>
-                <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition">
-                    <Image src="/icons/gray/globe-alt.png" alt="globe" width={20} height={20} />
-                    Google
-                </button>
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                        <Image src="/icons/gray/github.png" alt="github" width={20} height={20} />
+                        GitHub
+                    </button>
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                        <Image src="/icons/gray/globe-alt.png" alt="globe" width={20} height={20} />
+                        Google
+                    </button>
                 </div>
+                <p className="mt-5" style={{color: feedbackMsg === 'Loading' ? '#0BBB67' : '#8E4752'}}>{feedbackMsg}</p>
             </div>
             {/* Create Account */}
             <div className="bg-[#181e2e] rounded-xl shadow-lg p-8 flex-1 min-w-[300px]">
@@ -71,12 +98,14 @@ function SignPage() {
                         className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="First Name"
                         defaultValue="John"
+                        onChange={(e) => setCreateName(e.target.value)}
                         />
                         <input
                         type="text"
                         className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="Last Name"
                         defaultValue="Doe"
+                        onChange={(e) => setCreateSurname(e.target.value)}
                         />
                     </div>
                     <div>
@@ -85,6 +114,7 @@ function SignPage() {
                         className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="Email Address"
                         defaultValue="john@namemind.com"
+                        onChange={(e) => setCreateEmail(e.target.value)}
                         />
                     </div>
                     <div>
@@ -92,6 +122,7 @@ function SignPage() {
                         type="password"
                         className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="Create a strong password"
+                        onChange={(e) => setCreatePassword(e.target.value)}
                         />
                     </div>
                     <div>
@@ -99,30 +130,23 @@ function SignPage() {
                         type="password"
                         className="w-full bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="Confirm your password"
+                        onChange={(e) => setCreateConfirmPassword(e.target.value)}
                         />
                     </div>
-                    <button className="w-full bg-[#BF08B8] text-white font-semibold py-2 rounded-lg hover:bg-[#19B6F9] transition">
+                    <button className="w-full bg-[#BF08B8] text-white font-semibold py-2 rounded-lg hover:bg-[#19B6F9] transition cursor-pointer">
                         Create Account
                     </button>
                 </form>
-            </div>
-            </div>
-            {/* Features */}
-            <div className="w-full max-w-3xl bg-[#19B6F9] rounded-xl p-8 flex flex-col md:flex-row items-center justify-between shadow-lg mb-8">
-            <div className="flex flex-col items-center flex-1 mb-6 md:mb-0">
-                <Image src="/icons/green/bolt.png" alt="bolt" width={32} height={32} className="mb-2" />
-                <p className="text-white font-bold mb-1">AI-Powered Suggestions</p>
-                <p className="text-white text-xs text-center">Get intelligent domain name suggestions tailored to your business</p>
-            </div>
-            <div className="flex flex-col items-center flex-1 mb-6 md:mb-0">
-                <Image src="/icons/light-blue/globe-alt.png" alt="globe" width={32} height={32} className="mb-2" />
-                <p className="text-white font-bold mb-1">Global Domain Search</p>
-                <p className="text-white text-xs text-center">Search across hundreds of TLDs and find the perfect match</p>
-            </div>
-            <div className="flex flex-col items-center flex-1">
-                <Image src="/icons/purple/shield.png" alt="shield" width={32} height={32} className="mb-2" />
-                <p className="text-white font-bold mb-1">Secure & Reliable</p>
-                <p className="text-white text-xs text-center">Enterprise grade security with real-time domain monitoring</p>
+                <div className="flex gap-4 mt-4">
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                        <Image src="/icons/gray/github.png" alt="github" width={20} height={20} />
+                        GitHub
+                    </button>
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                        <Image src="/icons/gray/globe-alt.png" alt="globe" width={20} height={20} />
+                        Google
+                    </button>
+                </div>
             </div>
             </div>
             {/* Footer Links */}
