@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/reusable/navbar'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -12,9 +12,15 @@ function GeneratePage() {
   const { generateDomains } = useGenerateDomain();
   const [ input, setInput ] = useState<string>('');
   const [ clicked, setClicked ] = useState<boolean>(false);
-  const [ extensions, setExtensions ] = useState<string[]>(['.com', '.io', '.tech', '.vercel.app', '.dev']);
+  const [ extensions, setExtensions ] = useState<string[]>(
+    JSON.parse(localStorage.getItem('extensions')) || ['.com', '.io', '.tech']
+  );
   const [ activeIndex, setActiveIndex ] = useState<number>();
   const [ show, setShow ] = useState<boolean>();
+
+  const showModal = (bool: boolean) => {
+    setShow(bool);
+  }
 
 
 
@@ -93,7 +99,7 @@ function GeneratePage() {
                 ))}
               </div>
             </div>
-            {show ? <PopupAdvanced /> : ''}
+            {show ? <PopupAdvanced showModal={showModal}/> : ''}
             <div className="flex items-center justify-between mt-6">
               <button className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => generateDomains(input)}>
                 <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />
@@ -101,7 +107,7 @@ function GeneratePage() {
               </button>
               <button 
                className="flex items-center bg-white text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer"
-               onClick={() => show ? setShow(false) : setShow(true)}
+               onClick={() => showModal(true)}
               >
                 <Image src="/icons/gray/cog.png" alt="cog" width={20} height={20} className="mr-2" />
                 Advanced

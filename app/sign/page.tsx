@@ -15,8 +15,8 @@ function SignPage() {
             <div className="flex flex-col md:flex-row gap-8 mb-10 w-full max-w-3xl justify-center">
             {/* Sign In */}
             <div className="bg-[#181e2e] rounded-xl shadow-lg p-8 flex-1 min-w-[300px]">
-                <div className="flex items-center mb-4">
-                <Image src="" alt="shield" width={28} height={28} />
+                <div className="flex items-center m\b-4">
+                <Image src="/icons/green/shield.png" alt="shield" width={28} height={28} />
                 <span className="ml-2 text-lg font-semibold text-white">Sign In</span>
                 </div>
                 <p className="text-gray-400 mb-6 text-sm">Access your domain management dashboard</p>
@@ -110,7 +110,7 @@ function SignPage() {
             {/* Features */}
             <div className="w-full max-w-3xl bg-[#19B6F9] rounded-xl p-8 flex flex-col md:flex-row items-center justify-between shadow-lg mb-8">
             <div className="flex flex-col items-center flex-1 mb-6 md:mb-0">
-                <Image src="/icons/" alt="bolt" width={32} height={32} className="mb-2" />
+                <Image src="/icons/green/bolt.png" alt="bolt" width={32} height={32} className="mb-2" />
                 <p className="text-white font-bold mb-1">AI-Powered Suggestions</p>
                 <p className="text-white text-xs text-center">Get intelligent domain name suggestions tailored to your business</p>
             </div>

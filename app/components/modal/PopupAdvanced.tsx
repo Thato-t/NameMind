@@ -1,11 +1,13 @@
 'use client';
-
+interface showProp{
+  showModal: boolean
+}
 
 import React, { useState } from 'react';
 import useDomainExtensions from '../../../hooks/domainExtensions';
 import Image from 'next/image';
 
-function PopupAdvanced() {
+function PopupAdvanced({showModal}: showProp) {
   const { extensions } = useDomainExtensions();
   const [activeExtensions, setActiveExtensions] = useState<string[]>([]);
 
@@ -13,6 +15,7 @@ function PopupAdvanced() {
   const handleAddExtension = (ext: string) => {
     if (!activeExtensions.includes(ext)) {
       setActiveExtensions([...activeExtensions, ext]);
+      localStorage.setItem('extensions', JSON.stringify(activeExtensions));
     }
   };
 
@@ -60,8 +63,8 @@ function PopupAdvanced() {
         </div>
         <div className="flex justify-end mt-6">
           <button 
-            className="bg-[#19B6F9] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#009689] transition"
-            // onClick={() => show(false)}
+            className="bg-[#19B6F9] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#009689] transition cursor-pointer"
+            onClick={() => showModal(false)}
           >
             Save
           </button>
