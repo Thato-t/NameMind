@@ -1,7 +1,7 @@
 'use client';
 interface showProp{
   showModal: boolean | null,
-  selectedExtensions: string[]
+  // selectedExtensions: string[]
 }
 
 import React, { useState,useEffect } from 'react';
