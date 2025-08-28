@@ -24,7 +24,7 @@ function PopupAdvanced({showModal, selectedExtensions}: showProp) {
   // Remove extension handler
   const handleRemoveExtension = (ext: string) => {
     setActiveExtensions(activeExtensions.filter(e => e !== ext));
-    selectedExtensions(activeExtensions);
+    selectedExtensions(activeExtensions.filter(e => e !== ext));
   };
 
   return (
