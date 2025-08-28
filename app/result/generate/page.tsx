@@ -85,7 +85,7 @@ function GeneratePage() {
                 {extensions.map((ext: string, index: number) => (
                   <div 
                    key={index}
-                   onClick={() => setActiveIndex([...index])}
+                   onClick={() => setActiveIndex(index)}
                    className={`
                     bg-[#181e2e] text-white px-3 py-1 rounded-lg text-xs cursor-pointer hover:bg-[#009689] transition
                     ${activeIndex === index  ? "bg-[#009689]" : "bg-[#181e2e]"}`}
