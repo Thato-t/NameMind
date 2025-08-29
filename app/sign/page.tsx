@@ -15,9 +15,9 @@ function SignPage() {
     const [ feedbackMsg, setFeedbackMsg] = useState<string>('');
 
     const emailRegex = /[a-zA-Z0-9]@gmail\.com/;
-    const testEmailRegex = (email) => emailRegex.test(email);
+    const testEmailRegex = (email: string) => emailRegex.test(email);
 
-    const SignHandleSubmit = async (e) => {
+    const SignHandleSubmit = async (e: any) => {
         e.preventDefault();
         if (!signEmail || !signPassword){
             setFeedbackMsg('All inputs are required');
