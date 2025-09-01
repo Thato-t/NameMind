@@ -1,6 +1,6 @@
 'use client';
 interface showProp{
-  showModal: boolean | null;
+  showModal: (bool: boolean | null) => void;
   selectedExtensions: (ext: string[]) => void
 }
 
