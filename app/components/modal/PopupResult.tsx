@@ -15,7 +15,7 @@ function PopupResult({ isAvailable, domain }: AvailableProps) {
         <>
             <div className=" max-w-md bg-[#181e2e] rounded-xl p-6 flex flex-col shadow-lg mt-14" style={{display: isTrue ? 'none' : 'flex'}}>
                 <Available isAvailable={isAvailable} />
-                <p className="text-white mt-2">{`https://${domain} ${available ? 'is available to use' : 'is not available to use'}`}</p>
+                <p className="text-white mt-2">{`https://${domain} ${isAvailable ? 'is available to use' : 'is not available to use'}`}</p>
             </div>
         </>
     )
