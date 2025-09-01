@@ -14,7 +14,7 @@ function LandingResult() {
 
     const [ domain, setDomain ] = useState<string>(domainEntered);
     const [ platform, setPlatform ] = useState<string>('.vercel.app');
-    const [ available , setAvailable] = useState<boolean | null>(null);
+    const [ available, setAvailable] = useState<boolean>(false);
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
 
@@ -75,7 +75,7 @@ function LandingResult() {
             {status === '' ? '' : 
                 domain.trim() === '' ?
                 <span className="text-red-500 text-sm">{errMsg}</span> : 
-                <Available available={available} />
+                <Available isAvailable={available} />
             }
             </div>
             {/* Button */}
@@ -99,7 +99,7 @@ function LandingResult() {
                 Free to Use
             </div>
         </div>
-        <PopupResult available={available} domain={domain} />
+        <PopupResult isAvailable={available} domain={domain} />
     </main>
   )
 }

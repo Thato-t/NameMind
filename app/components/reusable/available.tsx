@@ -2,14 +2,14 @@
 import React from 'react';
 import Image from 'next/image'
 
-interface AvailableProps{
-    available: boolean | null
+interface IsAvailableProps{
+    isAvailable: boolean | null | undefined
 }
 
-function Available({ available }: AvailableProps) {
+function Available({ isAvailable }: IsAvailableProps) {
     return(
         <>
-            {available ? 
+            {isAvailable ? 
                 <div className="flex items-center">
                     <span className="w-5 h-5 rounded-full bg-green-400 flex items-center justify-center mr-2">
                     <Image src="/icons/green/check-circle.png" alt="available" width={14} height={14} />
