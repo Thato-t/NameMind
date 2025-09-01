@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 function LandingResult() {
     const platformsArr: string[] = ['.vercel.app', '.netlify.app', '.co.za', '.com', '.io'];
-    const domainEntered: string = (window.localStorage.getItem('domainEntered') ?? '""') || '';
+    const domainEntered: string = (localStorage.getItem('domainEntered') ?? '""') || '';
     const router = useRouter();
 
     const [ domain, setDomain ] = useState<string>(domainEntered);
