@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image'
 
 interface AvailableProps{
-    available: boolean 
+    available: boolean | null
 }
 
 function Available({ available }: AvailableProps) {
