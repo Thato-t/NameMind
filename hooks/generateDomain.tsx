@@ -19,7 +19,7 @@ function useGenerateDomain() {
       console.log(data);
     } catch (error) {
       console.error('Error found', error);
-      setErrMsg(data.error);
+      setErrMsg('Error');
     }
   }
   return { generateDomains, names, errMsg }
