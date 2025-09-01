@@ -14,7 +14,7 @@ function LandingResult() {
 
     const [ domain, setDomain ] = useState<string>(domainEntered);
     const [ platform, setPlatform ] = useState<string>('.vercel.app');
-    const [ available, setAvailable] = useState<boolean>(false);
+    const [ available, setAvailable] = useState<boolean | undefined | null>(false);
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
 
