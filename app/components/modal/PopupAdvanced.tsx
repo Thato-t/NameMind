@@ -28,7 +28,7 @@ function PopupAdvanced({showModal, selectedExtensions}: showProp) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm">
       <div className="bg-[#181e2e] rounded-xl shadow-2xl p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-white mb-4 text-center">Advanced Extensions</h2>
         <div className="flex flex-wrap gap-2 mb-6 justify-center">

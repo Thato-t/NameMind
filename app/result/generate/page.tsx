@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import useGenerateDomain from '../../../hooks/generateDomain';
 import PopupAdvanced from '../../components/modal/PopupAdvanced';
+import PopupGenerate from '../../components/modal/PopupGenerate';
 
 function GeneratePage() {
   const router = useRouter();
@@ -15,9 +16,10 @@ function GeneratePage() {
   const [ extensions, setExtensions ] = useState<string[]>([]);
   const [ activeIndex, setActiveIndex ] = useState<number>();
   const [ show, setShow ] = useState<boolean | null>(null);
+  const [ generateModal, setGenerateModal ] = useState<boolean | null>(null);
 
   const showModal = (bool: boolean) => setShow(bool);
-
+  const showGenerateModal = (bool: boolean) => setGenerateModal(bool); 
 
 
   return (
@@ -96,8 +98,14 @@ function GeneratePage() {
               </div>
             </div>
             {show ? <PopupAdvanced showModal={showModal} selectedExtensions={setExtensions} /> : ''}
+            {generateModal ? <PopupGenerate showGenerateModal={showGenerateModal} showModal={showModal}/> : ''}
             <div className="flex items-center justify-between mt-6">
-              <button className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => generateDomains(input)}>
+              <button 
+               className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" 
+               onClick={() => {
+                generateDomains(input)
+                showGenerateModal(true) 
+               }}>
                 <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />
                 Generate Domain Ideas
               </button>
