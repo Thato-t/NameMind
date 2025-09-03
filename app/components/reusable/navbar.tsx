@@ -74,7 +74,7 @@ function Navbar(){
                     </button>
                     <button
                         onClick={() => checkingDomain()}
-                        className="flex items-center px-4 py-2 rounded bg-white text-gray-400 hover:bg-gray-200 transition cursor-pointer"
+                        className="flex items-center px-4 py-2 rounded bg-white text-gray-400 hover:bg-gray-200 transition cursor-pointer cursor-not-allowed"
                     >
                         Check
                     </button>
