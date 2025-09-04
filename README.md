@@ -1,21 +1,27 @@
 # NameMind
 
-NameMind is a project built to explore and analyze names using advanced algorithms and data processing techniques. With a focus on creativity, accuracy, and ease of use, NameMind provides tools and features for name generation, validation, and analysis. Whether you are building an application that needs smart name suggestions or want to analyze name trends, NameMind offers a robust foundation.
+NameMind is an AI-powered domain discovery and management platform. Instantly generate, search, and analyze domain names with smart suggestions, real-time availability.
 
 ## Features
 
-- **Name Generation**: Generate unique names based on configurable patterns and datasets.
-- **Name Validation**: Check names against rules for appropriateness, uniqueness, or custom requirements.
-- **Name Analysis**: Discover trends, origins, and popularity of names using integrated data.
-- **Extensible and Modular**: Easily add new name datasets or algorithms.
+- **AI-Powered Domain Generator**: Create unique domain names using advanced algorithms and smart suggestions.
+- **Domain Search Center**: Find, check, and secure the perfect domain for your project.
+- **Real-Time Availability**: Instantly check domain and subdomain status across popular platforms.
+- **Instant Deployment**: Deploy domains instantly to platforms like Vercel and Netlify.
+
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **Backend/API**: Next.js API routes
+- **Icons & Images**: Custom assets (add your own in `/public/icons` and `/public/images`)
 
 ## Getting Started
 
 ### Prerequisites
 
-- Python 3.8+ (if backend is Python)
-- Node.js 16+ (if frontend or API is JavaScript)
-- Required dependencies listed in `requirements.txt` or `package.json`.
+- Node.js 16+
+- npm
 
 ### Installation
 
@@ -28,38 +34,55 @@ cd NameMind
 
 Install dependencies:
 
-_For Python:_
-```bash
-pip install -r requirements.txt
-```
-
-_For Node.js:_
 ```bash
 npm install
 ```
 
-### Usage
+### Running the App
 
-#### Basic Example
+Start the development server:
 
-```python
-# Python example
-from namemind import NameGenerator
-
-generator = NameGenerator()
-print(generator.generate())
+```bash
+npm run dev
 ```
 
-```javascript
-// JavaScript example
-const { NameGenerator } = require('namemind');
-const generator = new NameGenerator();
-console.log(generator.generate());
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+```
+app/
+  components/
+    landingMain.tsx
+    modal/
+      PopupAdvanced.tsx
+      PopupGenerate.tsx
+      PopupResult.tsx
+    reusable/
+      available.tsx
+      Loader.tsx
+      navbar.tsx
+  api/
+    check-subdomain/
+      landing-page/
+        route.ts
+    generate/
+      route.ts
+  landing-result/
+    page.tsx
+  result/
+    generate/
+      page.tsx
+  sign/
+    page.tsx
+public/
+  icons/
+  images/
 ```
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and open a pull request with your improvements.
+Contributions are welcome! Please fork the repository and open a pull request.
 
 1. Fork the repo
 2. Create your feature branch (`git checkout -b feature/my-feature`)
