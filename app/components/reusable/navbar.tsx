@@ -67,14 +67,14 @@ function Navbar(){
                 <div className="flex items-center space-x-2">
                     <button 
                         onClick={() => routeToSign()}
-                        className="px-4 py-2 rounded bg-[#009689] cursor-pointer text-white hover:bg-[#19B6F9] transition"
+                        className="px-4 py-2 rounded bg-[#009689] text-white hover:bg-[#19B6F9] transition cursor-not-allowed"
                         style={{cursor: generatePage ? 'not-allowed' : 'pointer'}}
                     >
                         Generate
                     </button>
                     <button
                         onClick={() => checkingDomain()}
-                        className="flex items-center px-4 py-2 rounded bg-white text-gray-400 hover:bg-gray-200 transition cursor-not-allowed"
+                        className="flex items-center px-4 py-2 rounded bg-white text-gray-400 hover:bg-gray-200 transition cursor-pointer"
                     >
                         Check
                     </button>

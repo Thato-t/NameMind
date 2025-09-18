@@ -5,6 +5,7 @@ import Available from  '../components/reusable/available';
 import useDomainCheck from '../../hooks/domainCheck';
 import PopupResult from '../components/modal/PopupResult';
 import { useRouter } from 'next/navigation';
+import Loader from '../components/reusable/Loader';
 
 
 function LandingResult() {
@@ -21,15 +22,25 @@ function LandingResult() {
     const [ available, setAvailable] = useState<boolean | undefined | null>(false);
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
+    const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
     const checkingDomain = () => {
+        setIsLoading(true);
         if (domain.trim() === '') {
             setErrMsg('Please enter a domain');
+            setIsLoading(false);
             return;
         }
         const fullDomain: string = domain + platform;
         checkDomain(fullDomain);
+        if (status === 'Error') {
+            setErrMsg('Error checking domain');
+            setAvailable(null);
+            setIsLoading(false);
+            return;
+        }
         status === 'Taken' ? setAvailable(false) : setAvailable(true);
+        setIsLoading(false);
     }
 
 
@@ -77,14 +88,16 @@ function LandingResult() {
             {/* Status Row */}
             <div className="flex items-center w-full mb-4">
             {status === '' ? '' : 
-                domain.trim() === '' ?
+                domain.trim() === '' || status === 'Error'?
                 <span className="text-red-500 text-sm">{errMsg}</span> : 
                 <Available isAvailable={available} />
             }
             </div>
             {/* Button */}
-            <button className="w-full flex items-center justify-center bg-[#19B6F9] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => checkingDomain()}>
-                <Image src="/icons/white/search.png" alt="search" width={20} height={20} className="mr-2" />
+            <button className="w-full flex items-center justify-center bg-[#19B6F9] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => checkingDomain()}
+            style={{cursor: isLoading ? 'not-allowed' : 'pointer'}}
+            >
+                {isLoading ? <Loader /> : <Image src="/icons/white/search.png" alt="search" width={20} height={20} className="mr-2" />}
                 Check Availability
             </button>
         </div>

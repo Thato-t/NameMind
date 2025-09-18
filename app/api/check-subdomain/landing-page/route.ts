@@ -9,11 +9,13 @@ export async function POST(req: Request) {
     const url = `https://${subdomain}`
     try {
         const res = await fetch(url, {method: 'HEAD'})
+        console.log(res)
         const status = res.status === 404 ? 'Available' : 'Taken'
+        console.log(status)
         return NextResponse.json({ status }, {status: 200});
 
     } catch (error) {
-        console.error('Error found', error)
-        return NextResponse.json({status: 'available'}, {status: 500})
+        console.error('Error found', error);
+        return NextResponse.json({status: 'Error'}, {status: 500})
     }
 }
