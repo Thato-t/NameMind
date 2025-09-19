@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import useGenerateDomain from '../../../hooks/generateDomain';
 import PopupAdvanced from '../../components/modal/PopupAdvanced';
 import PopupGenerate from '../../components/modal/PopupGenerate';
+import ChatModal from '../../components/modal/ChatModal';
 
 function GeneratePage() {
   const router = useRouter();
@@ -17,9 +18,11 @@ function GeneratePage() {
   const [ activeIndex, setActiveIndex ] = useState<number>();
   const [ show, setShow ] = useState<boolean | null>(null);
   const [ generateModal, setGenerateModal ] = useState<boolean | null>(null);
+  const [ chatModal, setChatModal ] = useState<boolean>(false);
 
   const showModal = (bool: boolean) => setShow(bool);
   const showGenerateModal = (bool: boolean) => setGenerateModal(bool); 
+  const showChatModal = (bool: boolean) => setChatModal(bool); 
 
 
   return (
@@ -99,6 +102,7 @@ function GeneratePage() {
             </div>
             {show ? <PopupAdvanced showModal={showModal} selectedExtensions={setExtensions} /> : ''}
             {generateModal ? <PopupGenerate showGenerateModal={showGenerateModal} showModal={showModal}/> : ''}
+            {chatModal ? <ChatModal showModal={showChatModal} /> : ''}
             <div className="flex items-center justify-between mt-6">
               <button 
                className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" 
@@ -129,7 +133,7 @@ function GeneratePage() {
               <p className="text-white text-sm mb-4">Get domain suggestions in seconds</p>
               <button 
                className="flex items-center bg-[#19B6F9] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer"
-               onClick={() => router.push('/sign')}
+               onClick={() => showChatModal(true)}
               >
                 <Image src="/icons/white/rocket.png" alt="rocket" width={20} height={20} className="mr-2" />
                 Quick Start
@@ -162,30 +166,18 @@ function GeneratePage() {
           </div>
         </div>
         {/* Bottom Features */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 w-full max-w-5xl mt-12 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mt-12 mb-8">
           <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
             <Image src="/images/logo.png" alt="logo" width={28} height={28} className="mb-2" />
             <p className="text-white font-semibold mb-1">Smart AI</p>
             <p className="text-gray-400 text-xs mb-2 text-center">Intelligent suggestions</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-pointer">Generate</button>
-          </div>
-          <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
-            <Image src="/icons/gray/circle-outer-dashed-circle.png" alt="bulk" width={28} height={28} className="mb-2" />
-            <p className="text-white font-semibold mb-1">Bulk Generate</p>
-            <p className="text-gray-400 text-xs mb-2 text-center">Multiple keywords</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-not-allowed">Upload List</button>
-          </div>
-          <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
-            <Image src="/icons/gray/shuffle.png" alt="mixer" width={28} height={28} className="mb-2" />
-            <p className="text-white font-semibold mb-1">Name Mixer</p>
-            <p className="text-gray-400 text-xs mb-2 text-center">Combine words</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-not-allowed">Mix Names</button>
+            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-not-allowed">Generate</button>
           </div>
           <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
             <Image src="/icons/gray/check-circle.png" alt="availability" width={28} height={28} className="mb-2" />
             <p className="text-white font-semibold mb-1">Availability</p>
             <p className="text-gray-400 text-xs mb-2 text-center">Real-time check</p>
-            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-pointer">Check</button>
+            <button className="bg-[#19B6F9] text-white px-4 py-1 rounded hover:bg-[#009689] transition text-sm cursor-pointer" onClick={() => router.push('/landing-result')}>Check</button>
           </div>
           <div className="bg-[#181e2e] rounded-lg p-5 flex flex-col items-center shadow-md">
             <Image src="/icons/gray/star.png" alt="star" width={28} height={28} className="mb-2" />

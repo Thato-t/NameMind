@@ -17,8 +17,12 @@ function useDomainCheck() {
             const data = await res.json();
             setStatus(data.status);
             setIsTrue(false);
+            return data.status; // Return the status so it can be used immediately
         } catch (error) {
             console.log('Error found', error);
+            setStatus('Error');
+            setIsTrue(false);
+            return 'Error';
         }
     }
 

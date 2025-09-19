@@ -7,7 +7,7 @@ interface LoaderProps {
 }
 
 const Loader: React.FC<LoaderProps> = ({ 
-  size = 'medium', 
+  size = 'small', 
   className = '' 
 }) => {
   const sizeClasses = {
@@ -17,7 +17,7 @@ const Loader: React.FC<LoaderProps> = ({
   };
 
   return (
-    <div className={`${sizeClasses[size]} ${className}`}>
+    <div className={`${sizeClasses[size]} ${className}  mr-2 mt-2`}>
       <div 
         className="animate-spin rounded-full border-2 border-gray-300 border-t-transparent"
       />

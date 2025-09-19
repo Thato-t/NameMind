@@ -1,7 +1,11 @@
+'use client';
+
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
 
 function LandingMain() {
+  const router = useRouter();
   return (
     <main className="flex flex-col items-center px-4 pt-8 bg-[#101624] min-h-screen">
       {/* Title */}
@@ -83,11 +87,11 @@ function LandingMain() {
           Join thousands of developers and entrepreneurs who trust NameMind for their domain needs
         </p>
         <div className="flex gap-4">
-          <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer">
+          <button className="flex items-center bg-[#19B6F9] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" onClick={() => router.push('/landing-result')}>
             <Image src="/icons/white/search.png" alt="search" width={20} height={20} className="mr-2" />
             Start Searching
           </button>
-          <button className="bg-white text-gray-700 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer">
+          <button className="bg-white text-gray-700 font-semibold px-5 py-2 rounded-lg hover:bg-gray-200 transition cursor-not-allowed">
             Learn More
           </button>
         </div>

@@ -11,20 +11,22 @@ import Loader from '../components/reusable/Loader';
 function LandingResult() {
     const platformsArr: string[] = ['.vercel.app', '.netlify.app', '.co.za', '.com', '.io'];
     const [ domainEntered, setDomainEntered ] = useState<string>('');
+    const [ domain, setDomain ] = useState<string>('');
+    
     useEffect(() => {
-        const value: string = (localStorage.getItem('domainEntered') ?? '""') || '';
-        setDomainEntered(value)
+        const value: string = localStorage.getItem('domainEntered') ?? '';
+        setDomainEntered(value);
+        setDomain(value); // Also set the domain state with the localStorage value
     },[])
+    
     const router = useRouter();
-
-    const [ domain, setDomain ] = useState<string>(domainEntered);
     const [ platform, setPlatform ] = useState<string>('.vercel.app');
-    const [ available, setAvailable] = useState<boolean | undefined | null>(false);
+    const [ available, setAvailable] = useState<boolean | undefined | null>(null);
     const { status, checkDomain } = useDomainCheck();
     const [ errMsg, setErrMsg ] = useState<string>('');
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
-    const checkingDomain = () => {
+    const checkingDomain = async () => {
         setIsLoading(true);
         if (domain.trim() === '') {
             setErrMsg('Please enter a domain');
@@ -32,14 +34,17 @@ function LandingResult() {
             return;
         }
         const fullDomain: string = domain + platform;
-        checkDomain(fullDomain);
-        if (status === 'Error') {
+        const result = await checkDomain(fullDomain);
+        
+        if (result === 'Error') {
             setErrMsg('Error checking domain');
             setAvailable(null);
             setIsLoading(false);
             return;
         }
-        status === 'Taken' ? setAvailable(false) : setAvailable(true);
+        
+        console.log(result);
+        result === 'Taken' ? setAvailable(false) : setAvailable(true);
         setIsLoading(false);
     }
 
@@ -70,7 +75,7 @@ function LandingResult() {
             <div className="flex items-center w-full mb-4">
             <input
                 type="text"
-                value={domain || domainEntered}
+                value={domain}
                 className="flex-1 bg-[#14213D] text-white px-4 py-2 rounded-l-lg focus:outline-none placeholder-gray-400"
                 placeholder="namemind"
                 onChange={(event) => setDomain(event.target.value)}
@@ -108,6 +113,7 @@ function LandingResult() {
                 Instant Results
             </div>
             <div className="flex items-center text-gray-400 text-sm">
+
                 <Image src="/icons/gray/shield.png" alt="shield" width={18} height={18} className="mr-2" />
                 100% Accurate
             </div>
