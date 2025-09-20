@@ -11,7 +11,7 @@ import ChatModal from '../../components/modal/ChatModal';
 
 function GeneratePage() {
   const router = useRouter();
-  const { generateDomains } = useGenerateDomain();
+  const { generateDomains, errMsg } = useGenerateDomain();
   const [ input, setInput ] = useState<string>('');
   const [ clicked, setClicked ] = useState<boolean>(false);
   const [ extensions, setExtensions ] = useState<string[]>([]);
@@ -19,10 +19,22 @@ function GeneratePage() {
   const [ show, setShow ] = useState<boolean | null>(null);
   const [ generateModal, setGenerateModal ] = useState<boolean | null>(null);
   const [ chatModal, setChatModal ] = useState<boolean>(false);
+  const [ errMessage, setErrMessage ] = useState<string>('');
 
   const showModal = (bool: boolean) => setShow(bool);
   const showGenerateModal = (bool: boolean) => setGenerateModal(bool); 
   const showChatModal = (bool: boolean) => setChatModal(bool); 
+
+  const generateNames = () => {
+    if(input.trim() === ''){
+      setErrMessage('Input required');
+      return;
+    }
+    generateDomains(input);
+    setErrMessage('');
+    if(errMsg) return;
+    // showGenerateModal(true); 
+  }
 
 
   return (
@@ -105,11 +117,9 @@ function GeneratePage() {
             {chatModal ? <ChatModal showModal={showChatModal} /> : ''}
             <div className="flex items-center justify-between mt-6">
               <button 
-               className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer" 
-               onClick={() => {
-                generateDomains(input)
-                showGenerateModal(true) 
-               }}>
+               className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer"
+               onClick={() => generateNames()}
+              >
                 <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />
                 Generate Domain Ideas
               </button>
@@ -121,6 +131,7 @@ function GeneratePage() {
                 Advanced
               </button>
             </div>
+            <p className="text-red-600 mt-2">{errMsg ? errMsg : errMessage}</p>
           </div>
           {/* Right: Instant Generation & Results */}
           <div className="flex flex-col gap-6 min-w-[300px]">

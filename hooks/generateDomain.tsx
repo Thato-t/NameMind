@@ -7,7 +7,7 @@ function useGenerateDomain() {
   const generateDomains = async (input: string) => {
     try {
       console.log(input)
-      const res = await fetch('api/generate', {
+      const res = await fetch('/api/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -15,11 +15,12 @@ function useGenerateDomain() {
         body: JSON.stringify({ description: input})
       });
       const data = await res.json();
-      setNames(data.names);
+      // setNames(data.names);
       console.log(data);
+      setErrMsg('');
     } catch (error) {
       console.error('Error found', error);
-      setErrMsg('Error');
+      setErrMsg('Failed to generate names');
     }
   }
   return { generateDomains, names, errMsg }
