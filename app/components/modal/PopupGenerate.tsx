@@ -1,13 +1,13 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
+import useGenerateDomain from '@/hooks/generateDomain';
 
 interface Domain {
   name: string;
   status: 'Available';
 
 }
-
 interface PopupGenerateProps {
     showGenerateModal: (bool: boolean) => void;
     showModal: (bool: boolean) => void;
@@ -39,7 +39,9 @@ function PopupGenerate({ showGenerateModal, showModal }: PopupGenerateProps) {
           name: "coredev.dev",
           status: "Available"
         }
-      ])
+      ]);
+    const { names, loading } = useGenerateDomain();
+    
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm">
         <div className="bg-[#181e2e] rounded-2xl shadow-2xl p-8 w-full max-w-2xl relative">

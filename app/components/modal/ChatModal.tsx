@@ -9,7 +9,6 @@ interface ChatMessage {
   isUser: boolean;
   timestamp: Date;
 }
-
 interface ChatModalProps {
   showModal: (bool: boolean) => void;
 }

@@ -8,10 +8,11 @@ import useGenerateDomain from '../../../hooks/generateDomain';
 import PopupAdvanced from '../../components/modal/PopupAdvanced';
 import PopupGenerate from '../../components/modal/PopupGenerate';
 import ChatModal from '../../components/modal/ChatModal';
+import Loader from '@/app/components/reusable/Loader';
 
 function GeneratePage() {
   const router = useRouter();
-  const { generateDomains, errMsg } = useGenerateDomain();
+  const { generateDomains, errMsg, names, loading } = useGenerateDomain();
   const [ input, setInput ] = useState<string>('');
   const [ clicked, setClicked ] = useState<boolean>(false);
   const [ extensions, setExtensions ] = useState<string[]>([]);
@@ -26,16 +27,20 @@ function GeneratePage() {
   const showChatModal = (bool: boolean) => setChatModal(bool); 
 
   const generateNames = () => {
-    if(input.trim() === ''){
+    if(!input.trim()){
       setErrMessage('Input required');
       return;
     }
     generateDomains(input);
     setErrMessage('');
-    if(errMsg) return;
-    // showGenerateModal(true); 
+    if(errMsg) {
+      return;
+    }
   }
-
+  // if (loading){
+  //   showGenerateModal(true); 
+  //   console.log(names);
+  // }
 
   return (
     <>
@@ -118,9 +123,10 @@ function GeneratePage() {
             <div className="flex items-center justify-between mt-6">
               <button 
                className="flex items-center bg-[#181e2e] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer"
+               style={{cursor: loading ? 'not-allowed' : 'pointer'}}
                onClick={() => generateNames()}
               >
-                <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />
+                {loading ? <Loader /> : <Image src="/icons/white/sparkles-alt.png" alt="sparkles" width={20} height={20} className="mr-2" />}
                 Generate Domain Ideas
               </button>
               <button 
