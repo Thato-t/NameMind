@@ -73,11 +73,11 @@ function SignPage() {
                     </button>
                 </form>
                 <div className="flex gap-4 mt-4">
-                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-not-allowed">
                         <Image src="/icons/gray/github.png" alt="github" width={20} height={20} />
                         GitHub
                     </button>
-                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-not-allowed">
                         <Image src="/icons/gray/globe-alt.png" alt="globe" width={20} height={20} />
                         Google
                     </button>
@@ -103,8 +103,8 @@ function SignPage() {
                         <input
                         type="text"
                         className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
-                        placeholder="Last Name"
-                        defaultValue="Doe"
+                        placeholder="Username"
+                        defaultValue="John2"
                         onChange={(e) => setCreateSurname(e.target.value)}
                         />
                     </div>
@@ -138,11 +138,11 @@ function SignPage() {
                     </button>
                 </form>
                 <div className="flex gap-4 mt-4">
-                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-not-allowed">
                         <Image src="/icons/gray/github.png" alt="github" width={20} height={20} />
                         GitHub
                     </button>
-                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-pointer">
+                    <button className="flex-1 bg-[#14213D] text-white py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-[#181e2e] transition cursor-not-allowed">
                         <Image src="/icons/gray/globe-alt.png" alt="globe" width={20} height={20} />
                         Google
                     </button>
@@ -150,9 +150,6 @@ function SignPage() {
             </div>
             </div>
             {/* Footer Links */}
-            <div className="text-center text-gray-400 text-sm mb-2">
-            Already have an account? <a href="#" className="text-[#19B6F9] hover:underline">Sign in here</a>
-            </div>
             <div className="text-center text-gray-400 text-sm">
             Need help? <a href="#" className="text-[#19B6F9] hover:underline">Contact Support</a>
             </div>

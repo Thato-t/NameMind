@@ -42,6 +42,11 @@ function GeneratePage() {
   //   console.log(names);
   // }
 
+  const openChatModal = () => {
+    router.push('/sign');
+    // showChatModal(true)
+  }
+
   return (
     <>
       <Navbar />
@@ -150,7 +155,7 @@ function GeneratePage() {
               <p className="text-white text-sm mb-4">Get domain suggestions in seconds</p>
               <button 
                className="flex items-center bg-[#19B6F9] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#009689] transition cursor-pointer"
-               onClick={() => showChatModal(true)}
+               onClick={() => openChatModal()}
               >
                 <Image src="/icons/white/rocket.png" alt="rocket" width={20} height={20} className="mr-2" />
                 Quick Start

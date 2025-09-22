@@ -10,10 +10,12 @@ function Navbar(){
     const pathname = usePathname();
     const [ domain, setDomain ] = useState<string>('');
     const [ generatePage, setGeneratePage ] = useState<boolean>(false);
+    const [ signPage, setSignPage ] = useState<boolean>(false);
     const { checkDomain } = useDomainCheck();
 
     useEffect(() => {
-        pathname === '/result/generate' ? setGeneratePage(true) : setGeneratePage(false)
+        pathname === '/result/generate' ? setGeneratePage(true) : setGeneratePage(false);
+        pathname === '/sign' ? setSignPage(true) : setSignPage(false);
     }, [pathname])
 
     const routeToSign = () => {
@@ -68,7 +70,7 @@ function Navbar(){
                     <button 
                         onClick={() => routeToSign()}
                         className="px-4 py-2 rounded bg-[#009689] text-white hover:bg-[#19B6F9] transition cursor-not-allowed"
-                        style={{cursor: generatePage ? 'not-allowed' : 'pointer'}}
+                        // style={{cursor: generatePage || signPage ? 'not-allowed' : 'pointer'}}
                     >
                         Generate
                     </button>
