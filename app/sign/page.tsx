@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../components/reusable/navbar';
+import useAuth from '@/hooks/authentication';
 
 function SignPage() {
+    const { signIn, signUp, pending, loading } = useAuth();
     const [ signEmail, setSignEmail ] = useState<string>('');
     const [ signPassword, setSignPassword ] = useState<string>('');
     const [ createName, setCreateName ] = useState<string>('');
@@ -27,7 +29,11 @@ function SignPage() {
             setFeedbackMsg('Your email format must be like this john@namemind.com');
             return;
         }
-        setFeedbackMsg('Loading')
+        if (createPassword !== createConfirmPassword){
+            return setFeedbackMsg('Passwords don\'t match.');
+        }
+        
+        setFeedbackMsg('Loading ...')
     }
   return (
     <>
