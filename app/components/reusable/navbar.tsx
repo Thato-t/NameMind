@@ -70,7 +70,7 @@ function Navbar(){
                     <button 
                         onClick={() => routeToSign()}
                         className="px-4 py-2 rounded bg-[#009689] text-white hover:bg-[#19B6F9] transition cursor-not-allowed"
-                        style={{cursor: generatePage || signPage ? 'not-allowed' : 'pointer'}}
+                        // style={{cursor: generatePage || signPage ? 'not-allowed' : 'pointer'}}
                     >
                         Generate
                     </button>

@@ -9,39 +9,48 @@ function useAuth() {
 
 
     const signIn = async (name: string, username: string, email: string, password: string) => {
-        setLoading(true);
-        setErrMsg('');
-        try{
-            const res = await fetch('/api/sign', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, username, email, password})
-              });
-              setLoading(false)
-        }catch(err){
-            console.error('Error found', err);
-            // setErrMsg(err)
-        }
+      setLoading(true);
+      setErrMsg('');
+      try{
+          const res = await fetch('/api/sign', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ 
+                name: name,
+                username: username,
+                email: email,
+                password: password
+              })
+            });
+            const data = await res.json();
+            console.log(data);
+            setLoading(false)
+      }catch(err){
+          console.error('Error found', err);
+          // setErrMsg(err)
+      }
     }
 
     const signUp = async (email: string, password: string) => {
-        setPending(true);
-        setErrMsg('');
-        try{
-            const res = await fetch('/api/sign', {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-              });
-              setPending(false)
-        }catch(err){
-            console.error('Error found', err);
-            // setErrMsg(err)
-        }
+      setPending(true);
+      setErrMsg('');
+      try{
+          const res = await fetch('/api/sign', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ email, password })
+            });
+            const data = await res.json()
+            console.log(data);
+            setPending(false)
+      }catch(err){
+          console.error('Error found', err);
+          // setErrMsg(err)
+      }
     }
 
 

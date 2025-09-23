@@ -1,6 +1,6 @@
 import { supabase } from '../supabase/client'
 import { supabaseAdmin } from '../supabase/server'
-
+// TODO: create you own functions to checj the sign in and up
 // Sign up user
 export const signUp = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signUp({

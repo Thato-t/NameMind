@@ -1,39 +1,60 @@
 'use client';
-
+// TODO: add the eye icons on the password inputs to show the password
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../components/reusable/navbar';
 import useAuth from '@/hooks/authentication';
+import Loader from '../components/reusable/Loader';
 
 function SignPage() {
     const { signIn, signUp, pending, loading } = useAuth();
     const [ signEmail, setSignEmail ] = useState<string>('');
     const [ signPassword, setSignPassword ] = useState<string>('');
     const [ createName, setCreateName ] = useState<string>('');
-    const [ createSurname, setCreateSurname ] = useState<string>('');
+    const [ createUsername, setCreateUsername ] = useState<string>('');
     const [ createEmail, setCreateEmail ] = useState<string>('');
     const [ createPassword, setCreatePassword ] = useState<string>('');
     const [ createConfirmPassword, setCreateConfirmPassword ] = useState<string>('');
     const [ feedbackMsg, setFeedbackMsg] = useState<string>('');
+    const [ errMsg, setErrMsg] = useState<string>('');
 
     const emailRegex = /[a-zA-Z0-9]@gmail\.com/;
     const testEmailRegex = (email: string) => emailRegex.test(email);
 
-    const SignHandleSubmit = async (e: any) => {
+    const SignUpSubmit = async (e: any) => {
         e.preventDefault();
-        if (!signEmail || !signPassword){
+        setFeedbackMsg('');
+        if (!testEmailRegex(signEmail)){
+            setFeedbackMsg('Your email format must be like this john@gmail.com');
+            return;
+        }
+        if (!signEmail && !signPassword){
             setFeedbackMsg('All inputs are required');
             return;
         }
-        if (!testEmailRegex(signEmail)){
-            setFeedbackMsg('Your email format must be like this john@namemind.com');
+        signUp(signEmail, signPassword)
+        
+        setFeedbackMsg('Loading ...')
+    }
+
+    const SignInSubmit = async (e: any) => {
+        e.preventDefault();
+        setFeedbackMsg('');
+        if (!testEmailRegex(createEmail)){
+            setErrMsg('Your email format must be like this john@gmail.com');
+            return;
+        }
+        if (!createName && !createUsername && !createEmail && !createPassword && !createConfirmPassword){
+            setErrMsg('All inputs are required');
             return;
         }
         if (createPassword !== createConfirmPassword){
-            return setFeedbackMsg('Passwords don\'t match.');
+            setErrMsg('Passwords don\'t match.');
+            return;
         }
-        
-        setFeedbackMsg('Loading ...')
+
+        signIn(createName, createUsername, createEmail, createConfirmPassword);
+        setErrMsg('Loading ...');
     }
   return (
     <>
@@ -50,7 +71,7 @@ function SignPage() {
                 <span className="ml-2 text-lg font-semibold text-white">Sign In</span>
                 </div>
                 <p className="text-gray-400 mb-6 text-sm">Access your domain management dashboard</p>
-                <form className="space-y-4" onSubmit={SignHandleSubmit}>
+                <form className="space-y-4" onSubmit={SignUpSubmit}>
                     <div>
                         <input
                         type="email"
@@ -88,7 +109,7 @@ function SignPage() {
                         Google
                     </button>
                 </div>
-                <p className="mt-5" style={{color: feedbackMsg === 'Loading' ? '#0BBB67' : '#8E4752'}}>{feedbackMsg}</p>
+                <p className="mt-5" style={{color: feedbackMsg === 'Loading ...' ? '#0BBB67' : '#8E4752'}}>{feedbackMsg}</p>
             </div>
             {/* Create Account */}
             <div className="bg-[#181e2e] rounded-xl shadow-lg p-8 flex-1 min-w-[300px]">
@@ -97,7 +118,7 @@ function SignPage() {
                 <span className="ml-2 text-lg font-semibold text-white">Create Account</span>
                 </div>
                 <p className="text-gray-400 mb-6 text-sm">Join thousands of domain enthusiasts</p>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={SignInSubmit}>
                     <div className="flex gap-2">
                         <input
                         type="text"
@@ -111,7 +132,7 @@ function SignPage() {
                         className="w-1/2 bg-[#14213D] text-white px-4 py-2 rounded-lg focus:outline-none placeholder-gray-400"
                         placeholder="Username"
                         defaultValue="John2"
-                        onChange={(e) => setCreateSurname(e.target.value)}
+                        onChange={(e) => setCreateUsername(e.target.value)}
                         />
                     </div>
                     <div>
@@ -153,6 +174,7 @@ function SignPage() {
                         Google
                     </button>
                 </div>
+                <p className="mt-5" style={{color: errMsg === 'Loading ...' ? '#0BBB67' : '#8E4752'}}>{errMsg}</p>
             </div>
             </div>
             {/* Footer Links */}
